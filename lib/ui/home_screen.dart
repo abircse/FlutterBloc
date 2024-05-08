@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   LoginRepository repository = LoginRepository();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               height: 70.0,
               child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    Map requestBody = {
-                      'email': email.value.text,
-                      'password': password.value.text,
-                    };
-                    repository.userLogin(requestBody).then((value) => {
+                onPressed: () async {
+                  Map requestBody = {
+                    'email': email.value.text,
+                    'password': password.value.text,
+                  };
+                  repository.userLogin(requestBody).then((value) => {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value as String)))
-                    });
-
                   });
                 },
                 style: ElevatedButton.styleFrom(
