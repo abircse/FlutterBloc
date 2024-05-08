@@ -8,7 +8,6 @@ class LoginRepository {
   final _url = "https://reqres.in/api/login";
 
   Future<dynamic> userLogin(requestBody) async {
-
     try{
       final response = await http.post(Uri.parse(_url), body: requestBody);
       final body = response.body;

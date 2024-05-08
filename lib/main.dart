@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterblocarchitecture/ui/home_screen.dart';
+import 'package:flutterblocarchitecture/ui/screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

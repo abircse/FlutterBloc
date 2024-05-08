@@ -7,9 +7,15 @@ class LoginEvent extends Equatable{
 
   @override
   List<Object?> get props => [];
+
 }
 
 class UserLoginEvent extends LoginEvent {
   final Map request;
   const UserLoginEvent(this.request);
+}
+
+class UserForgotPasswordEvent extends LoginEvent {
+  final String email;
+  const UserForgotPasswordEvent(this.email);
 }
