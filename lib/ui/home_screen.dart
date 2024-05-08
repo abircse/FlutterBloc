@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutterblocarchitecture/data/login_repository.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  LoginRepository repository = LoginRepository();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +42,11 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 20.0),
-            const TextField(
+            TextField(
+              controller: email,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email_outlined),
                 border: OutlineInputBorder(),
                 hintText: 'Email',
@@ -43,10 +56,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10.0),
-            const TextField(
+            TextField(
+              controller: password,
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.password),
                 border: OutlineInputBorder(),
                 hintText: 'Password',
@@ -60,7 +74,18 @@ class HomeScreen extends StatelessWidget {
               width: double.infinity,
               height: 70.0,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    Map requestBody = {
+                      'email': email.value.text,
+                      'password': password.value.text,
+                    };
+                    repository.userLogin(requestBody).then((value) => {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value as String)))
+                    });
+
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,
                   shape: RoundedRectangleBorder(
