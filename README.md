@@ -3,8 +3,7 @@
 A new Flutter project.
 
 ## Screenshot
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-05-08 at 23 19 49](https://github.com/abircse/FlutterBloc/assets/22006238/13ddb67b-987b-4de7-86c2-980040195d08)
-
+<img src="https://github.com/abircse/FlutterBloc/assets/22006238/13ddb67b-987b-4de7-86c2-980040195d08" width="400" height="790" alt="Iphone 15 Pro Max">
 ## Getting Started
 
 This project is a starting point for a Flutter application.
