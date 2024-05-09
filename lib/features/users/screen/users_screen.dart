@@ -12,7 +12,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-
   late UsersBloc bloc = UsersBloc();
 
   @override
@@ -24,7 +23,6 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("User List"),
@@ -37,12 +35,15 @@ class _UserScreenState extends State<UserScreen> {
           if (state is UsersFailedState) {
             return Center(child: Text(state.message));
           }
-          if(state is UsersSuccessState){
+          if (state is UsersSuccessState) {
             return ListView.builder(
                 itemCount: state.usersModel.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   final user = state.usersModel.data![index];
                   return ListTile(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                       leading: const Icon(Icons.person),
                       title: Text(user.firstName.toString()));
                 });
