@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterblocarchitecture/data/login_repository.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_bloc.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_event.dart';
@@ -33,14 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               if (state is LoginLoadingState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Loading....")));
+                EasyLoading.show(status: "Login....");
               }
               else if (state is LoginErrorState) {
+                EasyLoading.dismiss();
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(state.message)));
               }
               if (state is LoginSuccessState) {
+                EasyLoading.dismiss();
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(state.message)));
               }

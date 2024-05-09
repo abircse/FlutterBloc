@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterblocarchitecture/features/users/bloc/users_bloc.dart';
 import 'package:flutterblocarchitecture/features/users/bloc/users_event.dart';
 import 'package:flutterblocarchitecture/features/users/bloc/users_state.dart';
@@ -32,12 +33,14 @@ class _UserScreenState extends State<UserScreen> {
         child: BlocBuilder<UsersBloc, UsersState>(
           builder: (context, state) {
             if (state is UsersLoadingState) {
-              return const Center(child: CircularProgressIndicator());
+               EasyLoading.show(status: "Loading User");
             }
             if (state is UsersFailedState) {
+              EasyLoading.dismiss();
               return Center(child: Text(state.message));
             }
             if (state is UsersSuccessState) {
+              EasyLoading.dismiss();
               return ListView.builder(
                   itemCount: state.usersModel.data?.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -50,7 +53,7 @@ class _UserScreenState extends State<UserScreen> {
                         title: Text(user.firstName.toString()));
                   });
             } else {
-              return const Center(child: Text("No Data Found"));
+              return const Center(child: Text(""));
             }
           },
         ),
