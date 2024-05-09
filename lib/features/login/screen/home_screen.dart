@@ -4,6 +4,7 @@ import 'package:flutterblocarchitecture/features/login/bloc/login_event.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_state.dart';
 import 'package:flutterblocarchitecture/data/login_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterblocarchitecture/features/users/bloc/users_bloc.dart';
 import 'package:flutterblocarchitecture/features/users/screen/users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -122,7 +123,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 70.0,
                   child: ElevatedButton(
                     onPressed: ()  {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const UserScreen()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute<UserScreen>(
+                          builder: (_) => BlocProvider.value(
+                            value: BlocProvider.of<UsersBloc>(context),
+                            child: const UserScreen(),
+                          ),
+                        ),
+                      );
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const UserScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
