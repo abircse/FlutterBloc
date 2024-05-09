@@ -12,12 +12,12 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+
   late UsersBloc bloc = UsersBloc();
 
   @override
   void initState() {
     super.initState();
-    bloc = BlocProvider.of<UsersBloc>(context);
     bloc.add(LoadUserList());
   }
 
@@ -27,30 +27,33 @@ class _UserScreenState extends State<UserScreen> {
       appBar: AppBar(
         title: const Text("User List"),
       ),
-      body: BlocBuilder<UsersBloc, UsersState>(
-        builder: (context, state) {
-          if (state is UsersLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is UsersFailedState) {
-            return Center(child: Text(state.message));
-          }
-          if (state is UsersSuccessState) {
-            return ListView.builder(
-                itemCount: state.usersModel.data?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final user = state.usersModel.data![index];
-                  return ListTile(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      leading: const Icon(Icons.person),
-                      title: Text(user.firstName.toString()));
-                });
-          } else {
-            return const Center(child: Text("No Data Found"));
-          }
-        },
+      body: BlocProvider(
+        create: (context) => bloc,
+        child: BlocBuilder<UsersBloc, UsersState>(
+          builder: (context, state) {
+            if (state is UsersLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is UsersFailedState) {
+              return Center(child: Text(state.message));
+            }
+            if (state is UsersSuccessState) {
+              return ListView.builder(
+                  itemCount: state.usersModel.data?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final user = state.usersModel.data![index];
+                    return ListTile(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        leading: const Icon(Icons.person),
+                        title: Text(user.firstName.toString()));
+                  });
+            } else {
+              return const Center(child: Text("No Data Found"));
+            }
+          },
+        ),
       ),
     );
   }
