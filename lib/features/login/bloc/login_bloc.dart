@@ -1,6 +1,6 @@
 
-import 'package:flutterblocarchitecture/ui//bloc/login_event.dart';
-import 'package:flutterblocarchitecture/ui//bloc/login_state.dart';
+import 'package:flutterblocarchitecture/features/login/bloc/login_event.dart';
+import 'package:flutterblocarchitecture/features/login/bloc/login_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutterblocarchitecture/data/login_repository.dart';
 

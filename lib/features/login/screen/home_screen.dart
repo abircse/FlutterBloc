@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutterblocarchitecture/ui/bloc/login_bloc.dart';
-import 'package:flutterblocarchitecture/ui//bloc/login_event.dart';
-import 'package:flutterblocarchitecture/ui//bloc/login_state.dart';
+import 'package:flutterblocarchitecture/features/login/bloc/login_bloc.dart';
+import 'package:flutterblocarchitecture/features/login/bloc/login_event.dart';
+import 'package:flutterblocarchitecture/features/login/bloc/login_state.dart';
 import 'package:flutterblocarchitecture/data/login_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterblocarchitecture/features/users/screen/users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,20 +15,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  LoginBloc bloc = LoginBloc();
   LoginRepository repository = LoginRepository();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+    final loginBloc = BlocProvider.of<LoginBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("F L U T T E R  B L O C"),
       ),
-      body: BlocProvider(
-        create: (context) => bloc,
-        child: BlocListener<LoginBloc, LoginState>(
+      body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginLoadingState) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'password': password.value.text,
                       };
 
-                      bloc.add(UserLoginEvent(requestBody));
+                      loginBloc.add(UserLoginEvent(requestBody));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
@@ -114,12 +115,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontSize: 20.0, color: Colors.white),
                     ),
                   ),
+                ),
+                const SizedBox(height: 20.0),
+                SizedBox(
+                  width: double.infinity,
+                  height: 70.0,
+                  child: ElevatedButton(
+                    onPressed: ()  {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const UserScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    child: const Text(
+                      "See Users",
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
+                  ),
                 )
               ],
             ),
           ),
-        ),
-      ),
+        )
     );
   }
 }
