@@ -55,7 +55,7 @@ class _UserScreenState extends State<UserScreen> {
                         onTap: () {
                           Navigator.of(context).pop();
                         },
-                        leading: const Icon(Icons.person),
+                        leading: Image.network(user.avatar!),
                         title: Text("${user.firstName!} ${user.lastName}"),
                         subtitle: Text(user.email.toString()),
                     );
