@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutterblocarchitecture/data/model/PostModel.dart';
 import 'package:flutterblocarchitecture/data/model/UserModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -64,6 +65,25 @@ class UserRepository {
       return json['id'].toString();
     }
     catch(e){
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  Future<List<PostModel>> loadUserWithPagination(int page) async {
+    String _url = 'https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page}';
+
+    try {
+      final response = await http.get(Uri.parse(_url));
+      if (response.statusCode == 200) {
+        final List<dynamic> json = jsonDecode(response.body);
+        return json.map((post) => PostModel.fromJson(post)).toList();
+      } else {
+        throw Exception('Failed to load posts: ${response.statusCode}');
+      }
+    }
+    catch (e) {
       if (kDebugMode) {
         print(e);
       }
