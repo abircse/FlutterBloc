@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutterblocarchitecture/features/users/bloc/users_bloc.dart';
-import 'package:flutterblocarchitecture/features/users/bloc/users_event.dart';
-import 'package:flutterblocarchitecture/features/users/bloc/users_state.dart';
+import 'package:flutterblocarchitecture/features/users/addusers/screen/adduser_screen.dart';
+import 'package:flutterblocarchitecture/features/users/getusers/bloc/users_bloc.dart';
+import 'package:flutterblocarchitecture/features/users/getusers/bloc/users_event.dart';
+import 'package:flutterblocarchitecture/features/users/getusers/bloc/users_state.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -27,6 +28,11 @@ class _UserScreenState extends State<UserScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("User List"),
+        actions: [
+          IconButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const AddUserScreen()));
+          }, icon: const Icon(Icons.add))
+        ],
       ),
       body: BlocProvider(
         create: (context) => bloc,
@@ -50,7 +56,9 @@ class _UserScreenState extends State<UserScreen> {
                           Navigator.of(context).pop();
                         },
                         leading: const Icon(Icons.person),
-                        title: Text(user.firstName.toString()));
+                        title: Text("${user.firstName!} ${user.lastName}"),
+                        subtitle: Text(user.email.toString()),
+                    );
                   });
             } else {
               return const Center(child: Text(""));

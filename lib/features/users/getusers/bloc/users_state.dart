@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutterblocarchitecture/model/UserModel.dart';
+import 'package:flutterblocarchitecture/data/model/UserModel.dart';
 
 class UsersState extends Equatable {
   const UsersState();

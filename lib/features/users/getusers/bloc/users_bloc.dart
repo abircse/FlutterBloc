@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutterblocarchitecture/data/login_repository.dart';
-import 'package:flutterblocarchitecture/model/UserModel.dart';
+import 'package:flutterblocarchitecture/data/model/UserModel.dart';
+import 'package:flutterblocarchitecture/data/repository/user_repository.dart';
 
 import 'users_event.dart';
 import 'users_state.dart';
 
 class UsersBloc extends Bloc<UsersEvent, UsersState> {
 
-  final LoginRepository repository = LoginRepository();
+  final UserRepository repository = UserRepository();
 
   UsersBloc() : super(UsersInitialState()) {
     on<UsersEvent>((event, emit) async {

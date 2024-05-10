@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutterblocarchitecture/data/login_repository.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_bloc.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_event.dart';
 import 'package:flutterblocarchitecture/features/login/bloc/login_state.dart';
-import 'package:flutterblocarchitecture/features/users/screen/users_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import '../../users/getusers/screen/users_screen.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
-  LoginRepository repository = LoginRepository();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
