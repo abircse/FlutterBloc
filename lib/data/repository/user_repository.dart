@@ -47,7 +47,7 @@ class UserRepository {
     }
   }
 
-  Future<dynamic> addUser(requestBody) async {
+  Future<dynamic> userRegistration(requestBody) async {
 
     const _url = "https://reqres.in/api/register";
 

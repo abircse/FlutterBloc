@@ -11,7 +11,7 @@ class AddUserBloc extends Bloc<AddUserEvent, AddUserState> {
     on<AddUser>((event, emit) async {
       try {
         emit(AddUserLoadingState());
-        final String id = await repository.addUser(event.requestBody);
+        final String id = await repository.userRegistration(event.requestBody);
         emit(AddUserSuccessState(id));
       }
       catch (e) {
