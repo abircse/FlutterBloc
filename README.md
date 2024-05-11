@@ -6,8 +6,12 @@ BLoC architecture is a highly useful pattern used in the Flutter framework that 
 <img src="https://github.com/abircse/FlutterBloc/assets/22006238/13ddb67b-987b-4de7-86c2-980040195d08" width="400" height="790" alt="Iphone 15 Pro Max">
 
 
-## Resource Link
+## DEPENDENCIES
+
 Keep All these dependencies on pubspec.yaml
-flutter_bloc: ^8.1.5
-equatable: ^2.0.5
-http: ^1.2.0
+
+| Plugin | Version |
+| ------ |---------|
+| flutter_bloc | ^8.1.5 |
+| equatable | ^2.0.5 |
+| http | ^1.2.0 |

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutterblocarchitecture/features/login/screen/login_screen.dart';
 import 'package:flutterblocarchitecture/features/users/pagination/screen/paging_page.dart';
 
 void main() {
