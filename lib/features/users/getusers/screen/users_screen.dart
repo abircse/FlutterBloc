@@ -15,14 +15,6 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
 
-  late UsersBloc bloc = UsersBloc();
-
-  @override
-  void initState() {
-    super.initState();
-    bloc.add(LoadUserList());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +27,7 @@ class _UserScreenState extends State<UserScreen> {
         ],
       ),
       body: BlocProvider(
-        create: (context) => bloc,
+        create: (context) => UsersBloc()..add(LoadUserList()),
         child: BlocBuilder<UsersBloc, UsersState>(
           builder: (context, state) {
             if (state is UsersLoadingState) {
